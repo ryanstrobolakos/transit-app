@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.techtalentsouth.TransitApp.model.Bus;
+
 @Service
 public class TransitService {
 	@Value("${transit_url}")

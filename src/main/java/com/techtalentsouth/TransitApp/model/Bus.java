@@ -1,5 +1,7 @@
 package com.techtalentsouth.TransitApp.model;
 
+import org.springframework.web.client.RestTemplate;
+
 public class Bus {
 	public String ADHERENCE;
     public String BLOCKID;
