@@ -1,7 +1,5 @@
 package com.techtalentsouth.TransitApp.model;
 
-import org.springframework.web.client.RestTemplate;
-
 public class Bus {
 	public String ADHERENCE;
     public String BLOCKID;
@@ -16,13 +14,5 @@ public class Bus {
     public String TRIPID;
     public String VEHICLE;
     public double distance;
-    
-    private Location getCoordinates(String description) {
-        description = description.replace(" ", "+");
-        String url = geocodingUrl + description + "+GA&key=" + googleApiKey;
-        RestTemplate restTemplate = new RestTemplate();
-        GeocodingResponse response = restTemplate.getForObject(url, GeocodingResponse.class);
-        return response.results.get(0).geometry.location;
-    }
 
 }

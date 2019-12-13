@@ -14,6 +14,7 @@ import com.techtalentsouth.TransitApp.model.Bus;
 import com.techtalentsouth.TransitApp.model.BusComparator;
 import com.techtalentsouth.TransitApp.model.BusRequest;
 import com.techtalentsouth.TransitApp.model.DistanceResponse;
+import com.techtalentsouth.TransitApp.model.GeocodingResponse;
 
 @Service
 public class TransitService {
@@ -33,6 +34,14 @@ public class TransitService {
         RestTemplate restTemplate = new RestTemplate();
         Bus[] buses = restTemplate.getForObject(transitUrl, Bus[].class);
         return Arrays.asList(buses);
+    }
+    
+    private Location getCoordinates(String description) {
+        description = description.replace(" ", "+");
+        String url = geocodingUrl + description + "+GA&key=" + googleApiKey;
+        RestTemplate restTemplate = new RestTemplate();
+        GeocodingResponse response = restTemplate.getForObject(url, GeocodingResponse.class);
+        return response.results.get(0).geometry.location;
     }
     
     private double getDistance(Location origin, Location destination) {
