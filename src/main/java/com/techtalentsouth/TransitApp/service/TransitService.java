@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.parsing.Location;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +14,7 @@ import com.techtalentsouth.TransitApp.model.BusComparator;
 import com.techtalentsouth.TransitApp.model.BusRequest;
 import com.techtalentsouth.TransitApp.model.DistanceResponse;
 import com.techtalentsouth.TransitApp.model.GeocodingResponse;
+import com.techtalentsouth.TransitApp.model.Location;
 
 @Service
 public class TransitService {
@@ -42,11 +42,6 @@ public class TransitService {
         RestTemplate restTemplate = new RestTemplate();
         GeocodingResponse response = restTemplate.getForObject(url, GeocodingResponse.class);
         return response.results.get(0).geometry.location;
-    }
-    
-    private double getDistance(Location origin, Location destination) {
-        String url = distanceUrl + "origins=" + origin.lat + "," + origin.lng 
-        + "&destinations=" + destination.lat + "," + destination.lng + "&key=" + googleApiKey;
     }
     
     private double getDistance(Location origin, Location destination) {
