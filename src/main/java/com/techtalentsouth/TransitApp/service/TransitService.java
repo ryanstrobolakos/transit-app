@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.techtalentsouth.TransitApp.model.Bus;
 import com.techtalentsouth.TransitApp.model.BusComparator;
 import com.techtalentsouth.TransitApp.model.BusRequest;
+import com.techtalentsouth.TransitApp.model.DistanceResponse;
 
 @Service
 public class TransitService {
@@ -32,6 +33,19 @@ public class TransitService {
         RestTemplate restTemplate = new RestTemplate();
         Bus[] buses = restTemplate.getForObject(transitUrl, Bus[].class);
         return Arrays.asList(buses);
+    }
+    
+    private double getDistance(Location origin, Location destination) {
+        String url = distanceUrl + "origins=" + origin.lat + "," + origin.lng 
+        + "&destinations=" + destination.lat + "," + destination.lng + "&key=" + googleApiKey;
+    }
+    
+    private double getDistance(Location origin, Location destination) {
+        String url = distanceUrl + "origins=" + origin.lat + "," + origin.lng 
+        + "&destinations=" + destination.lat + "," + destination.lng + "&key=" + googleApiKey;
+        RestTemplate restTemplate = new RestTemplate();
+        DistanceResponse response = restTemplate.getForObject(url, DistanceResponse.class);
+        return response.rows.get(0).elements.get(0).distance.value * 0.000621371;
     }
     
     public List<Bus> getNearbyBuses(BusRequest request){
