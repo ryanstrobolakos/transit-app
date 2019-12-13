@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.techtalentsouth.TransitApp.model.Bus;
+import com.techtalentsouth.TransitApp.model.BusComparator;
 import com.techtalentsouth.TransitApp.model.BusRequest;
 
 @Service
